@@ -1,0 +1,8 @@
+userName : "Pranjeet Goswami",
+password : "12836pra2njw1",
+joined : "Jan-1-2025",
+isLoggedIn : true,
+isSubscribed : true,
+courseEnrolled : "Web Development",
+completedLactures : "40",
+pendingLactures : "20",
