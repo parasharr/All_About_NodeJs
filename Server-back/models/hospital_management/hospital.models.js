@@ -23,7 +23,7 @@ const hospitalSchema = new mongoose.Schema(
     },
     specializedIn: [
       {
-        type: String,
+        type: String, 
       },
     ],
   },
