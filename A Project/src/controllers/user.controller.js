@@ -1,5 +1,6 @@
 import { asyncHandler } from "../utils/asycHandler.js";
-import {apiError} from "../utils/apiError.js";
+import { apiError } from "../utils/apiError.js";
+import { User } from "../models/user.model.js";
 
 const registerUser = asyncHandler(async (req, res) => {
   // get user details from frontend
@@ -16,11 +17,20 @@ const registerUser = asyncHandler(async (req, res) => {
   console.log("email :", email);
 
   // in this array if every field is available then trim, even after the trim if the field is empty then it will return true
-  if([
-    fullname, email, username, password
-  ].some((field)=> field?.trim() === "")){
-    throw new apiError(400, "All fields are required")
+  if (
+    [fullname, email, username, password].some((field) => field?.trim() === "")
+  ) {
+    throw new apiError(400, "All fields are required");
   }
+  const existedUser = User.findOne({
+    $or: [{ username }, { email }],
+  });
+
+  if (existedUser) {
+    throw new apiError(409, "User with email or username already exists");
+  }
+
+  req.files?.avatar[0]?.path
 });
 
 export default registerUser;
